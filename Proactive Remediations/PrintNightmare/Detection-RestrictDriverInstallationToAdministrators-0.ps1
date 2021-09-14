@@ -2,10 +2,12 @@ try {
     $RestrictDriverInstallationToAdministrators = Get-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Printers\PointAndPrint' -Name RestrictDriverInstallationToAdministrators | Select-Object -ExpandProperty RestrictDriverInstallationToAdministrators
     
     if ($RestrictDriverInstallationToAdministrators -eq 0) {
-        return $true
+        Write-Host "RestrictDriverInstallationToAdministrators=0"
+        exit 0
     }
     else {
-        return $false
+        Write-Host "Not compliant"
+        exit 1
     }
 }
 catch {
